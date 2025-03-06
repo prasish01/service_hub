@@ -15,47 +15,50 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Pen } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-      <div className="grid auto-rows-min gap-4 md:grid-cols-2">
-        <div className="flex flex-col items-center justify-center bg-muted/50 rounded-xl p-6">
-          <div className="relative w-full h-48 bg-purple-200 rounded-t-xl">
-            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
-              <div className="relative h-40 w-40 rounded-full bg-gray-300 border-4 border-white">
-                <Image
-                  src="/profile.jpg"
-                  alt="Profile"
-                  width={160}
-                  height={160}
-                  className="object-cover w-full h-full rounded-full"
-                />
-              </div>
-            </div>
+      <div className="relative w-full h-54 bg-slate-300 rounded-xl ">
+        {/* Banner */}
+        <div className="relative w-full h-full">
+          {/* <Image
+            src="/banner.jpg" // Replace with your banner image path
+            alt="Banner"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-xl"
+          /> */}
+          {/* Change Banner Button */}
+          <div className="absolute bottom-4 right-4">
+            <button className="flex gap-2 bg-white/90 backdrop-blur-sm text-sm font-medium px-4 py-2 rounded-lg hover:bg-white transition-colors">
+              <Pen className="w-5 h-5" />
+              Change Banner
+            </button>
           </div>
-          {/* Name */}
-          <h2 className="mt-16 text-2xl font-bold">Jess Hong</h2>
         </div>
 
-        <div className="flex flex-col gap-4">
-          <div className="flex h-1/2 flex-col items-center justify-center bg-muted/50 rounded-xl p-6">
-            <h3 className="text-lg font-semibold">Change Banner</h3>
-            <p className="text-sm text-muted-foreground">
-              Upload a new banner image.
-            </p>
-          </div>
-
-          <div className="flex h-1/2 flex-col items-center justify-center bg-muted/50 rounded-xl p-6">
-            <h3 className="text-lg font-semibold">Change Avatar</h3>
-            <p className="text-sm text-muted-foreground">
-              Upload a new profile picture.
-            </p>
+        {/* Profile Image */}
+        <div className="absolute -bottom-16 left-8">
+          <div className="relative h-32 w-32 rounded-full bg-gray-300 border-4 border-white z-10">
+            <Image
+              src="/profile.jpg" // Replace with your profile image path
+              alt="Profile"
+              width={128}
+              height={128}
+              className="object-cover w-full h-full rounded-full"
+            />
+            {/* Change Avatar Button */}
+            <button className="absolute bottom-0 right-0 bg-white/90 backdrop-blur-sm text-sm font-medium px-3 py-1.5 rounded-full hover:bg-white transition-colors">
+              <Pen className="w-5 h-5 " />
+            </button>
           </div>
         </div>
       </div>
 
+      {/* Name */}
+      <h2 className="mt-20 text-2xl font-bold pl-8">Jess Hong</h2>
       <div className="bg-background min-h-[60vh] rounded-xl p-8 shadow-lg w-full max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-gray-800">Profile Page</h1>
         <form className="space-y-8">
