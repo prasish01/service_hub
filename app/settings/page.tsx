@@ -17,7 +17,7 @@ export default function Page() {
       </div>
 
       {/* Settings Form */}
-      <div className="bg-background rounded-xl p-8 shadow-lg w-full max-w-6xl mx-auto">
+      <div className="bg-background mx-auto w-full max-w-6xl rounded-xl p-8 shadow-lg">
         <form className="space-y-8">
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold text-gray-800">
@@ -153,7 +153,7 @@ export default function Page() {
                   </p>
                 </div>
                 <Select defaultValue="public">
-                  <SelectTrigger className="h-11 focus:ring-2 focus:ring-blue-500 w-[180px]">
+                  <SelectTrigger className="h-11 w-[180px] focus:ring-2 focus:ring-blue-500">
                     <SelectValue placeholder="Select visibility" />
                   </SelectTrigger>
                   <SelectContent>
@@ -214,7 +214,7 @@ export default function Page() {
           <div className="flex justify-end pt-6">
             <Button
               type="submit"
-              className="h-11 px-8 text-base font-medium bg-blue-600 hover:bg-blue-700 transition-colors"
+              className="h-11 bg-blue-600 px-8 text-base font-medium transition-colors hover:bg-blue-700"
             >
               Save Changes
             </Button>

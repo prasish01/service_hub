@@ -20,9 +20,9 @@ import { CalendarIcon, Pen } from "lucide-react";
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-      <div className="relative w-full h-54 bg-slate-300 rounded-xl ">
+      <div className="relative h-54 w-full rounded-xl bg-slate-300">
         {/* Banner */}
-        <div className="relative w-full h-full">
+        <div className="relative h-full w-full">
           {/* <Image
             src="/banner.jpg" // Replace with your banner image path
             alt="Banner"
@@ -31,9 +31,9 @@ export default function Home() {
             className="rounded-xl"
           /> */}
           {/* Change Banner Button */}
-          <div className="absolute bottom-4 right-4">
-            <button className="flex gap-2 bg-white/90 backdrop-blur-sm text-sm font-medium px-4 py-2 rounded-lg hover:bg-white transition-colors">
-              <Pen className="w-5 h-5" />
+          <div className="absolute right-4 bottom-4">
+            <button className="flex gap-2 rounded-lg bg-white/90 px-4 py-2 text-sm font-medium backdrop-blur-sm transition-colors hover:bg-white">
+              <Pen className="h-5 w-5" />
               Change Banner
             </button>
           </div>
@@ -41,26 +41,26 @@ export default function Home() {
 
         {/* Profile Image */}
         <div className="absolute -bottom-16 left-8">
-          <div className="relative h-32 w-32 rounded-full bg-gray-300 border-4 border-white z-10">
+          <div className="relative z-10 h-32 w-32 rounded-full border-4 border-white bg-gray-300">
             <Image
               src="/profile.jpg" // Replace with your profile image path
               alt="Profile"
               width={128}
               height={128}
-              className="object-cover w-full h-full rounded-full"
+              className="h-full w-full rounded-full object-cover"
             />
             {/* Change Avatar Button */}
-            <button className="absolute bottom-0 right-0 bg-white/90 backdrop-blur-sm text-sm font-medium px-3 py-1.5 rounded-full hover:bg-white transition-colors">
-              <Pen className="w-5 h-5 " />
+            <button className="absolute right-0 bottom-0 rounded-full bg-white/90 px-3 py-1.5 text-sm font-medium backdrop-blur-sm transition-colors hover:bg-white">
+              <Pen className="h-5 w-5" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Name */}
-      <h2 className="mt-20 text-2xl font-bold pl-8">Jess Hong</h2>
-      <div className="bg-background min-h-[60vh] rounded-xl p-8 shadow-lg w-full max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-gray-800">Profile Page</h1>
+      <h2 className="mt-20 pl-8 text-2xl font-bold">Jess Hong</h2>
+      <div className="bg-background mx-auto min-h-[60vh] w-full max-w-6xl rounded-xl p-8 shadow-lg">
+        <h1 className="mb-8 text-3xl font-bold text-gray-800">Profile Page</h1>
         <form className="space-y-8">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="space-y-2 md:col-span-2">
@@ -181,7 +181,7 @@ export default function Home() {
             </div>
             <div className="space-y-2 md:col-span-2">
               <div className="grid grid-cols-1 gap-[12px] md:grid-cols-[1fr_auto_1fr]">
-                <div className="space-y-2 w-full max-w-[160px]">
+                <div className="w-full max-w-[160px] space-y-2">
                   <label className="text-sm font-medium text-gray-700">
                     Date of Birth
                   </label>
@@ -189,7 +189,7 @@ export default function Home() {
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-full h-11 justify-start text-left font-normal bg-white hover:bg-gray-50"
+                        className="h-11 w-full justify-start bg-white text-left font-normal hover:bg-gray-50"
                       >
                         <CalendarIcon className="mr-2 h-4 w-4 text-gray-500" />
                         <span className="text-gray-700">Select date</span>
@@ -203,7 +203,7 @@ export default function Home() {
 
                 <div className="hidden md:block"></div>
 
-                <div className="space-y-2 w-full max-w-[200px]">
+                <div className="w-full max-w-[200px] space-y-2">
                   <label className="text-sm font-medium text-gray-700">
                     Gender
                   </label>
@@ -237,8 +237,8 @@ export default function Home() {
                 </SelectContent>
               </Select>
             </div>
-            <div className="space-y-4 max-w-[140px]">
-              <label className="text-sm font-medium text-gray-700 p ">
+            <div className="max-w-[140px] space-y-4">
+              <label className="p text-sm font-medium text-gray-700">
                 Preferred Age Range
               </label>
               <Input
@@ -285,7 +285,7 @@ export default function Home() {
           <div className="flex justify-end pt-6">
             <Button
               type="submit"
-              className="h-11 px-8 text-base font-medium bg-blue-600 hover:bg-blue-700 transition-colors"
+              className="h-11 bg-blue-600 px-8 text-base font-medium transition-colors hover:bg-blue-700"
             >
               Save Changes
             </Button>
