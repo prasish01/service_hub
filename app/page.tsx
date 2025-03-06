@@ -21,7 +21,6 @@ export default function Home() {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <div className="relative h-54 w-full rounded-xl bg-slate-300">
-        {/* Banner */}
         <div className="relative h-full w-full">
           {/* <Image
             src="/banner.jpg" // Replace with your banner image path
@@ -30,7 +29,7 @@ export default function Home() {
             objectFit="cover"
             className="rounded-xl"
           /> */}
-          {/* Change Banner Button */}
+
           <div className="absolute right-4 bottom-4">
             <button className="flex gap-2 rounded-lg bg-white/90 px-4 py-2 text-sm font-medium backdrop-blur-sm transition-colors hover:bg-white">
               <Pen className="h-5 w-5" />
@@ -39,17 +38,16 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Profile Image */}
         <div className="absolute -bottom-16 left-8">
           <div className="relative z-10 h-32 w-32 rounded-full border-4 border-white bg-gray-300">
             <Image
-              src="/profile.jpg" // Replace with your profile image path
+              src="/profile.jpg"
               alt="Profile"
               width={128}
               height={128}
               className="h-full w-full rounded-full object-cover"
             />
-            {/* Change Avatar Button */}
+
             <button className="absolute right-0 bottom-0 rounded-full bg-white/90 px-3 py-1.5 text-sm font-medium backdrop-blur-sm transition-colors hover:bg-white">
               <Pen className="h-5 w-5" />
             </button>
@@ -57,7 +55,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Name */}
       <h2 className="mt-20 pl-8 text-2xl font-bold">Jess Hong</h2>
       <div className="bg-background mx-auto min-h-[60vh] w-full max-w-6xl rounded-xl p-8 shadow-lg">
         <h1 className="mb-8 text-3xl font-bold text-gray-800">Profile Page</h1>

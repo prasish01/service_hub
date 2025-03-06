@@ -24,6 +24,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 
 // This is sample data.
 const data = {
@@ -50,7 +51,7 @@ const data = {
         },
         {
           title: "Services",
-          url: "#",
+          url: "/services",
         },
         {
           title: "Schedule",
@@ -75,32 +76,32 @@ const data = {
     },
     {
       title: "Profile",
-      url: "#",
+      url: "/",
       icon: User,
       items: [
         {
           title: "About",
-          url: "#",
+          url: "/",
         },
         {
           title: "Media Library",
-          url: "#",
+          url: "/",
         },
         {
           title: "Services",
-          url: "#",
+          url: "/",
         },
         {
           title: "Schedule",
-          url: "#",
+          url: "/",
         },
         {
           title: "Contact",
-          url: "#",
+          url: "/",
         },
         {
           title: "Visibility",
-          url: "#",
+          url: "/",
         },
       ],
     },
@@ -127,7 +128,7 @@ const data = {
   projects: [
     {
       name: "Settings",
-      url: "#",
+      url: "/settings",
       icon: Settings,
     },
     {
@@ -137,7 +138,7 @@ const data = {
     },
     {
       name: "Signout",
-      url: "#",
+      url: "/login",
       icon: LogOut,
     },
   ],
@@ -150,7 +151,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <Link href="/">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Command className="size-4" />
                 </div>
@@ -158,7 +159,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <span className="truncate font-semibold">Acme Inc</span>
                   <span className="truncate text-xs">Enterprise</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
