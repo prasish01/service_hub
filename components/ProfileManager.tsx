@@ -39,7 +39,7 @@ const ProfileManager = () => {
 
   return (
     <div className="bg-background mx-auto min-h-[60vh] w-full max-w-6xl rounded-xl p-8 shadow-lg">
-      <h1 className="mb-8 text-3xl font-bold text-gray-800">Profile Page</h1>
+      <h2 className="mb-8 text-3xl font-bold text-gray-800">Profile Page</h2>
       <form className="space-y-8">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="space-y-2 md:col-span-2">

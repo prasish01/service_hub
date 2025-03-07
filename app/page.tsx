@@ -45,7 +45,7 @@ export default function Home() {
         </div>
       </div>
 
-      <h2 className="mt-20 pl-8 text-2xl font-bold">Jess Hong</h2>
+      <h1 className="mt-20 pl-8 text-2xl font-bold">Jess Hong</h1>
       <ProfileManager />
       <ServicesPage />
       <Schedule />
