@@ -6,6 +6,7 @@ import ServicesPage from "@/components/Services";
 import Schedule from "@/components/Schedule";
 import Contact from "@/components/Contact";
 import Settings from "@/components/Settings";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -51,6 +52,9 @@ export default function Home() {
       <Schedule />
       <Contact />
       <Settings />
+      <div className="mr-9 flex justify-end py-4">
+        <Button className="bg-blue-600 hover:bg-blue-700">Save Changes</Button>
+      </div>
     </div>
   );
 }

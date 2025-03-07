@@ -1,7 +1,7 @@
 "use client";
 
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectTrigger,
@@ -34,9 +34,9 @@ const Settings = () => {
       </div>
 
       {/* Save Button */}
-      <div className="flex justify-end">
+      {/* <div className="flex justify-end">
         <Button className="bg-blue-600 hover:bg-blue-700">Save Changes</Button>
-      </div>
+      </div> */}
     </div>
   );
 };
