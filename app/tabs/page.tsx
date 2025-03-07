@@ -51,13 +51,23 @@ export default function Home() {
       <h2 className="mt-20 pl-8 text-2xl font-bold">Jess Hong</h2>
 
       {/* Tabs for Navigation */}
-      <Tabs defaultValue="profile" className="mx-8 w-auto cursor-pointer">
+      <Tabs defaultValue="profile" className="mx-8 w-auto">
         <TabsList className="mb-4 grid w-full grid-cols-5">
-          <TabsTrigger value="profile">Profile</TabsTrigger>
-          <TabsTrigger value="services">Services</TabsTrigger>
-          <TabsTrigger value="schedule">Schedule</TabsTrigger>
-          <TabsTrigger value="contact">Contact</TabsTrigger>
-          <TabsTrigger value="settings">Settings</TabsTrigger>
+          <TabsTrigger value="profile" className="cursor-pointer">
+            Profile
+          </TabsTrigger>
+          <TabsTrigger value="services" className="cursor-pointer">
+            Services
+          </TabsTrigger>
+          <TabsTrigger value="schedule" className="cursor-pointer">
+            Schedule
+          </TabsTrigger>
+          <TabsTrigger value="contact" className="cursor-pointer">
+            Contact
+          </TabsTrigger>
+          <TabsTrigger value="settings" className="cursor-pointer">
+            Settings
+          </TabsTrigger>
         </TabsList>
 
         {/* Profile Tab */}
