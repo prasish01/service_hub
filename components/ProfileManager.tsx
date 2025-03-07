@@ -46,7 +46,7 @@ const ProfileManager = () => {
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">
-                  Full Name
+                  Name
                 </label>
                 <Input
                   type="text"
@@ -294,14 +294,14 @@ const ProfileManager = () => {
         </div>
 
         {/* Submit Button */}
-        <div className="flex justify-end pt-6">
+        {/* <div className="flex justify-end pt-6">
           <Button
             type="submit"
             className="h-11 bg-blue-600 px-8 text-base font-medium transition-colors hover:bg-blue-700"
           >
             Save Changes
           </Button>
-        </div>
+        </div> */}
       </form>
     </div>
   );
