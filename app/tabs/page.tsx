@@ -1,6 +1,6 @@
-import Image from "next/image";
-
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Pen } from "lucide-react";
+import Image from "next/image";
 import ProfileManager from "@/components/ProfileManager";
 import ServicesPage from "@/components/Services";
 import Schedule from "@/components/Schedule";
@@ -10,6 +10,7 @@ import Settings from "@/components/Settings";
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+      {/* Banner Section */}
       <div className="relative h-54 w-full rounded-xl bg-slate-300">
         <div className="relative h-full w-full">
           {/* <Image
@@ -28,6 +29,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Profile Picture Section */}
         <div className="absolute -bottom-16 left-8">
           <div className="relative z-10 h-32 w-32 rounded-full border-4 border-white bg-gray-300">
             <Image
@@ -45,12 +47,44 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Profile Name */}
       <h2 className="mt-20 pl-8 text-2xl font-bold">Jess Hong</h2>
-      <ProfileManager />
-      <ServicesPage />
-      <Schedule />
-      <Contact />
-      <Settings />
+
+      {/* Tabs for Navigation */}
+      <Tabs defaultValue="profile" className="mx-8 w-auto cursor-pointer">
+        <TabsList className="mb-4 grid w-full grid-cols-5">
+          <TabsTrigger value="profile">Profile</TabsTrigger>
+          <TabsTrigger value="services">Services</TabsTrigger>
+          <TabsTrigger value="schedule">Schedule</TabsTrigger>
+          <TabsTrigger value="contact">Contact</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
+        </TabsList>
+
+        {/* Profile Tab */}
+        <TabsContent value="profile">
+          <ProfileManager />
+        </TabsContent>
+
+        {/* Services Tab */}
+        <TabsContent value="services">
+          <ServicesPage />
+        </TabsContent>
+
+        {/* Schedule Tab */}
+        <TabsContent value="schedule">
+          <Schedule />
+        </TabsContent>
+
+        {/* Contact Tab */}
+        <TabsContent value="contact">
+          <Contact />
+        </TabsContent>
+
+        {/* Settings Tab */}
+        <TabsContent value="settings">
+          <Settings />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
