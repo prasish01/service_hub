@@ -40,12 +40,12 @@ const data = {
     },
     {
       title: "Service Providers",
-      url: "/services",
+      url: "/service-providers",
       icon: HandHelping,
     },
     {
       title: "Profile",
-      url: "/",
+      url: "/tabs",
       icon: User,
     },
     {
