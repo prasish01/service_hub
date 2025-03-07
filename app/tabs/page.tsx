@@ -70,27 +70,22 @@ export default function Home() {
           </TabsTrigger>
         </TabsList>
 
-        {/* Profile Tab */}
         <TabsContent value="profile">
           <ProfileManager />
         </TabsContent>
 
-        {/* Services Tab */}
         <TabsContent value="services">
           <ServicesPage />
         </TabsContent>
 
-        {/* Schedule Tab */}
         <TabsContent value="schedule">
           <Schedule />
         </TabsContent>
 
-        {/* Contact Tab */}
         <TabsContent value="contact">
           <Contact />
         </TabsContent>
 
-        {/* Settings Tab */}
         <TabsContent value="settings">
           <Settings />
         </TabsContent>

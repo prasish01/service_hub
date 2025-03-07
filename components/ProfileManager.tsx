@@ -1,3 +1,7 @@
+"use client";
+import { useState } from "react";
+import { format } from "date-fns";
+import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -14,9 +18,25 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
 
 const ProfileManager = () => {
+  // State for Date of Birth
+  const [dob, setDob] = useState<Date | undefined>(undefined);
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
+  // Handle year navigation
+  const handlePreviousYear = () => {
+    setCurrentYear((prev) => prev - 1);
+  };
+
+  const handleNextYear = () => {
+    setCurrentYear((prev) => prev + 1);
+  };
+
+  // Define the date range for the current year
+  const fromDate = new Date(currentYear, 0, 1); // Start of the year
+  const toDate = new Date(currentYear, 11, 31); // End of the year
+
   return (
     <div className="bg-background mx-auto min-h-[60vh] w-full max-w-6xl rounded-xl p-8 shadow-lg">
       <h1 className="mb-8 text-3xl font-bold text-gray-800">Profile Page</h1>
@@ -138,9 +158,12 @@ const ProfileManager = () => {
               </SelectContent>
             </Select>
           </div>
+
+          {/* Date of Birth and Gender */}
           <div className="space-y-2 md:col-span-2">
             <div className="grid grid-cols-1 gap-[12px] md:grid-cols-[1fr_auto_1fr]">
-              <div className="w-full max-w-[160px] space-y-2">
+              {/* Date of Birth */}
+              <div className="w-full max-w-[180px] space-y-2">
                 <label className="text-sm font-medium text-gray-700">
                   Date of Birth
                 </label>
@@ -151,17 +174,47 @@ const ProfileManager = () => {
                       className="h-11 w-full justify-start bg-white text-left font-normal hover:bg-gray-50"
                     >
                       <CalendarIcon className="mr-2 h-4 w-4 text-gray-500" />
-                      <span className="text-gray-700">Select date</span>
+                      <span className="text-gray-700">
+                        {dob ? format(dob, "PPP") : "Select date"}
+                      </span>
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0">
-                    <Calendar mode="single" />
+                    <div className="flex items-center justify-between px-4 pt-4">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={handlePreviousYear}
+                        className="h-8 w-8 p-0"
+                      >
+                        <ChevronLeft className="h-4 w-4" />
+                      </Button>
+                      <span className="text-sm font-medium">{currentYear}</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleNextYear}
+                        className="h-8 w-8 p-0"
+                      >
+                        <ChevronRight className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <Calendar
+                      mode="single"
+                      selected={dob}
+                      onSelect={setDob}
+                      fromDate={fromDate}
+                      toDate={toDate}
+                      initialFocus
+                    />
                   </PopoverContent>
                 </Popover>
               </div>
 
+              {/* Spacer */}
               <div className="hidden md:block"></div>
 
+              {/* Gender */}
               <div className="w-full max-w-[200px] space-y-2">
                 <label className="text-sm font-medium text-gray-700">
                   Gender
@@ -241,14 +294,14 @@ const ProfileManager = () => {
         </div>
 
         {/* Submit Button */}
-        {/* <div className="flex justify-end pt-6">
+        <div className="flex justify-end pt-6">
           <Button
             type="submit"
             className="h-11 bg-blue-600 px-8 text-base font-medium transition-colors hover:bg-blue-700"
           >
             Save Changes
           </Button>
-        </div> */}
+        </div>
       </form>
     </div>
   );
