@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -22,73 +22,139 @@ import {
 const ProfileManager = () => {
   // State for Date of Birth
   const [dob, setDob] = useState<Date | undefined>(undefined);
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-
-  // Handle year navigation
-  const handlePreviousYear = () => {
-    setCurrentYear((prev) => prev - 1);
-  };
-
-  const handleNextYear = () => {
-    setCurrentYear((prev) => prev + 1);
-  };
-
-  // Define the date range for the current year
-  const fromDate = new Date(currentYear, 0, 1); // Start of the year
-  const toDate = new Date(currentYear, 11, 31); // End of the year
 
   return (
     <div className="bg-background mx-auto min-h-[60vh] w-full max-w-6xl rounded-xl p-8 shadow-lg">
       <h2 className="mb-8 text-3xl font-bold text-gray-800">Profile Page</h2>
       <form className="space-y-8">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div className="space-y-2 md:col-span-2">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">
-                  Name
-                </label>
-                <Input
-                  type="text"
-                  placeholder="John Doe"
-                  className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
+          {/* Name */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">Name</label>
+            <Input
+              type="text"
+              placeholder="John Doe"
+              className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
+            />
+          </div>
+
+          {/* Date of Birth */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">
+              Date of Birth
+            </label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="h-11 w-full justify-start bg-white text-left font-normal hover:bg-gray-50"
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4 text-gray-500" />
+                  <span className="text-gray-700">
+                    {dob ? format(dob, "PPP") : "Select date"}
+                  </span>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={dob}
+                  onSelect={setDob}
+                  initialFocus
                 />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">
-                  Email
-                </label>
-                <Input
-                  type="email"
-                  placeholder="john@example.com"
-                  className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
-                />
-              </div>
+              </PopoverContent>
+            </Popover>
+          </div>
+
+          {/* Location (Google Autocomplete Placeholder) */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">
+              Location
+            </label>
+            <Input
+              type="text"
+              placeholder="Enter your location"
+              className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
+            />
+          </div>
+
+          {/* Gender */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">Gender</label>
+            <Select>
+              <SelectTrigger className="h-11 focus:ring-2 focus:ring-blue-500">
+                <SelectValue placeholder="Select gender" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="male">Male</SelectItem>
+                <SelectItem value="female">Female</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Body Type */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">
+              Body Type
+            </label>
+            <Select>
+              <SelectTrigger className="h-11 focus:ring-2 focus:ring-blue-500">
+                <SelectValue placeholder="Select body type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="slim">Slim</SelectItem>
+                <SelectItem value="athletic">Athletic</SelectItem>
+                <SelectItem value="average">Average</SelectItem>
+                <SelectItem value="curvy">Curvy</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Height */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">Height</label>
+            <div className="flex gap-2">
+              <Input
+                type="number"
+                placeholder="175"
+                className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
+              />
+              <Select defaultValue="cm">
+                <SelectTrigger className="h-11 w-20 focus:ring-2 focus:ring-blue-500">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="cm">cm</SelectItem>
+                  <SelectItem value="ft">ft</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
+          {/* Weight */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">
-              Height (cm)
-            </label>
-            <Input
-              type="number"
-              placeholder="175"
-              className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">
-              Weight (kg)
-            </label>
-            <Input
-              type="number"
-              placeholder="70"
-              className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
-            />
+            <label className="text-sm font-medium text-gray-700">Weight</label>
+            <div className="flex gap-2">
+              <Input
+                type="number"
+                placeholder="70"
+                className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
+              />
+              <Select defaultValue="kg">
+                <SelectTrigger className="h-11 w-20 focus:ring-2 focus:ring-blue-500">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="kg">kg</SelectItem>
+                  <SelectItem value="lbs">lbs</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
-          {/* Hair and Eyes */}
+          {/* Hair Color */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700">
               Hair Color
@@ -106,6 +172,8 @@ const ProfileManager = () => {
               </SelectContent>
             </Select>
           </div>
+
+          {/* Eye Color */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700">
               Eye Color
@@ -124,166 +192,29 @@ const ProfileManager = () => {
             </Select>
           </div>
 
+          {/* Spoken Languages */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700">
-              Body Type
+              Spoken Languages
             </label>
             <Select>
               <SelectTrigger className="h-11 focus:ring-2 focus:ring-blue-500">
-                <SelectValue placeholder="Select body type" />
+                <SelectValue placeholder="Select languages" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="slim">Slim</SelectItem>
-                <SelectItem value="athletic">Athletic</SelectItem>
-                <SelectItem value="average">Average</SelectItem>
-                <SelectItem value="curvy">Curvy</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">
-              Ethnicity
-            </label>
-            <Select>
-              <SelectTrigger className="h-11 focus:ring-2 focus:ring-blue-500">
-                <SelectValue placeholder="Select ethnicity" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="asian">Asian</SelectItem>
-                <SelectItem value="african">African</SelectItem>
-                <SelectItem value="caucasian">Caucasian</SelectItem>
-                <SelectItem value="hispanic">Hispanic</SelectItem>
+                <SelectItem value="english">English</SelectItem>
+                <SelectItem value="spanish">Spanish</SelectItem>
+                <SelectItem value="french">French</SelectItem>
+                <SelectItem value="german">German</SelectItem>
                 <SelectItem value="other">Other</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
-          {/* Date of Birth and Gender */}
-          <div className="space-y-2 md:col-span-2">
-            <div className="grid grid-cols-1 gap-[12px] md:grid-cols-[1fr_auto_1fr]">
-              {/* Date of Birth */}
-              <div className="w-full max-w-[180px] space-y-2">
-                <label className="text-sm font-medium text-gray-700">
-                  Date of Birth
-                </label>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className="h-11 w-full justify-start bg-white text-left font-normal hover:bg-gray-50"
-                    >
-                      <CalendarIcon className="mr-2 h-4 w-4 text-gray-500" />
-                      <span className="text-gray-700">
-                        {dob ? format(dob, "PPP") : "Select date"}
-                      </span>
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0">
-                    <div className="flex items-center justify-between px-4 pt-4">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={handlePreviousYear}
-                        className="h-8 w-8 p-0"
-                      >
-                        <ChevronLeft className="h-4 w-4" />
-                      </Button>
-                      <span className="text-sm font-medium">{currentYear}</span>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={handleNextYear}
-                        className="h-8 w-8 p-0"
-                      >
-                        <ChevronRight className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <Calendar
-                      mode="single"
-                      selected={dob}
-                      onSelect={setDob}
-                      fromDate={fromDate}
-                      toDate={toDate}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-              </div>
-
-              {/* Spacer */}
-              <div className="hidden md:block"></div>
-
-              {/* Gender */}
-              <div className="w-full max-w-[200px] space-y-2">
-                <label className="text-sm font-medium text-gray-700">
-                  Gender
-                </label>
-                <Select>
-                  <SelectTrigger className="h-11 focus:ring-2 focus:ring-blue-500">
-                    <SelectValue placeholder="Select gender" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="male">Male</SelectItem>
-                    <SelectItem value="female">Female</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">
-              Looking For
-            </label>
-            <Select>
-              <SelectTrigger className="h-11 focus:ring-2 focus:ring-blue-500">
-                <SelectValue placeholder="Select preference" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="relationship">Relationship</SelectItem>
-                <SelectItem value="casual">Casual Dating</SelectItem>
-                <SelectItem value="friendship">Friendship</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="max-w-[140px] space-y-4">
-            <label className="p text-sm font-medium text-gray-700">
-              Preferred Age Range
-            </label>
-            <Input
-              type="text"
-              placeholder="25-35"
-              className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
-            />
-          </div>
-
+          {/* Description */}
           <div className="space-y-2 md:col-span-2">
             <label className="text-sm font-medium text-gray-700">
-              Personality Traits
-            </label>
-            <Input
-              type="text"
-              placeholder="Adventurous, Funny, Caring, etc."
-              className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
-            />
-          </div>
-          <div className="space-y-2 md:col-span-2">
-            <label className="text-sm font-medium text-gray-700">
-              Hobbies and Interests
-            </label>
-            <Textarea
-              placeholder="Traveling, Cooking, Reading, etc."
-              rows={3}
-              className="focus-visible:ring-2 focus-visible:ring-blue-500"
-            />
-          </div>
-
-          <div className="space-y-2 md:col-span-2">
-            <label className="text-sm font-medium text-gray-700">
-              About You
+              Description
             </label>
             <Textarea
               placeholder="Tell us about yourself..."
@@ -292,16 +223,6 @@ const ProfileManager = () => {
             />
           </div>
         </div>
-
-        {/* Submit Button */}
-        {/* <div className="flex justify-end pt-6">
-          <Button
-            type="submit"
-            className="h-11 bg-blue-600 px-8 text-base font-medium transition-colors hover:bg-blue-700"
-          >
-            Save Changes
-          </Button>
-        </div> */}
       </form>
     </div>
   );
