@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -18,24 +20,74 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import RichTextEditor from "./RichTextEditor";
+
+// Validation schema
+const formSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Must be at least 2 characters")
+    .regex(/^[A-Za-z\s]+$/, "Only alphabets allowed"),
+  dob: z.date({
+    required_error: "Please select a valid date",
+    invalid_type_error: "Please select a date",
+  }),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 const ProfileManager = () => {
-  // State for Date of Birth
-  const [dob, setDob] = useState<Date | undefined>(undefined);
+  const [isDobFocused, setIsDobFocused] = useState(false);
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors, dirtyFields },
+  } = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    mode: "onChange",
+  });
+
+  const dobValue = watch("dob");
+
+  // Safe date formatting function
+  const formatDate = (date: unknown) => {
+    if (date instanceof Date && isValid(date)) {
+      return format(date, "PPP");
+    }
+    return "Select date";
+  };
 
   return (
     <div className="bg-background mx-auto min-h-[60vh] w-full max-w-6xl rounded-xl p-8 shadow-lg">
       <h2 className="mb-8 text-3xl font-bold text-gray-800">Profile Page</h2>
       <form className="space-y-8">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {/* Name */}
+          {/* Name Field */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700">Name</label>
             <Input
+              {...register("name")}
               type="text"
               placeholder="John Doe"
-              className="h-11 focus-visible:ring-2 focus-visible:ring-blue-500"
+              className={`h-11 focus-visible:ring-2 ${
+                errors.name
+                  ? "border-red-500 focus-visible:ring-red-200"
+                  : "focus-visible:ring-blue-500"
+              }`}
             />
+            <div className="h-6">
+              {dirtyFields.name && !errors.name && (
+                <p className="mt-1 text-sm text-gray-400">
+                  Only alphabets allowed
+                </p>
+              )}
+              {errors.name && (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
           </div>
 
           {/* Date of Birth */}
@@ -47,26 +99,49 @@ const ProfileManager = () => {
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
-                  className="h-11 w-full justify-start bg-white text-left font-normal hover:bg-gray-50"
+                  className={`h-11 w-full justify-start bg-white text-left font-normal hover:bg-gray-50 ${
+                    errors.dob ? "border-red-500" : ""
+                  }`}
+                  onFocus={() => setIsDobFocused(true)}
+                  onBlur={() => setIsDobFocused(false)}
                 >
                   <CalendarIcon className="mr-2 h-4 w-4 text-gray-500" />
-                  <span className="text-gray-700">
-                    {dob ? format(dob, "PPP") : "Select date"}
-                  </span>
+                  <span className="text-gray-700">{formatDate(dobValue)}</span>
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
                 <Calendar
                   mode="single"
-                  selected={dob}
-                  onSelect={setDob}
+                  selected={
+                    dobValue instanceof Date && isValid(dobValue)
+                      ? dobValue
+                      : undefined
+                  }
+                  onSelect={(date) => {
+                    if (date) {
+                      setValue("dob", date);
+                      setIsDobFocused(false);
+                    }
+                  }}
                   initialFocus
                 />
               </PopoverContent>
             </Popover>
+            <div className="h-6">
+              {(isDobFocused || dirtyFields.dob) && !errors.dob && (
+                <p className="mt-1 text-sm text-gray-400">
+                  We only use this to calculate your age
+                </p>
+              )}
+              {errors.dob && (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.dob.message}
+                </p>
+              )}
+            </div>
+            <input type="hidden" {...register("dob", { valueAsDate: true })} />
           </div>
-
-          {/* Location (Google Autocomplete Placeholder) */}
+          {/* Location */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700">
               Location
@@ -216,11 +291,7 @@ const ProfileManager = () => {
             <label className="text-sm font-medium text-gray-700">
               Description
             </label>
-            <Textarea
-              placeholder="Tell us about yourself..."
-              rows={4}
-              className="focus-visible:ring-2 focus-visible:ring-blue-500"
-            />
+            <RichTextEditor />
           </div>
         </div>
       </form>
