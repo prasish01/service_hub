@@ -37,7 +37,7 @@ const data = {
   navMain: [
     {
       title: "Company",
-      url: "#",
+      url: "/",
       icon: Building2,
       isActive: true,
     },
